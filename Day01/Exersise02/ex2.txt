@@ -1,0 +1,53 @@
+Setting environment for using XAMPP for Windows.
+Disany@DESKTOP-GSBTFN8 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use UOV;
+Database changed
+MariaDB [UOV]> create table physicians;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [UOV]> create table physicians(Physician_ID char(10), Name varchar(20), Position varchar(30));
+Query OK, 0 rows affected (0.026 sec)
+
+MariaDB [UOV]> DESC physicians;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Physician_ID | char(10)    | YES  |     | NULL    |       |
+| Name         | varchar(20) | YES  |     | NULL    |       |
+| Position     | varchar(30) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.033 sec)
+
+MariaDB [UOV]> INSERT into physicians values(
+    -> '1','John Dorian','Staff Internist'),
+    -> ('2','Ellior Reid','Atteding Physician'),
+    -> ('3','Christopher Turk','Surgical attending physician'),
+    -> ('4','Percival Cox','Senior attending physician'),
+    -> ('5','Keith Dudemeister','Md resident'),
+    -> ('6','Molly clock','Attending physician');
+Query OK, 6 rows affected (0.018 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+MariaDB [UOV]> select * from physicians;
++--------------+-------------------+------------------------------+
+| Physician_ID | Name              | Position                     |
++--------------+-------------------+------------------------------+
+| 1            | John Dorian       | Staff Internist              |
+| 2            | Ellior Reid       | Atteding Physician           |
+| 3            | Christopher Turk  | Surgical attending physician |
+| 4            | Percival Cox      | Senior attending physician   |
+| 5            | Keith Dudemeister | Md resident                  |
+| 6            | Molly clock       | Attending physician          |
++--------------+-------------------+------------------------------+
+6 rows in set (0.001 sec)
+
+Conclusion:I have learnt about how to create the table and how to add data to database.
