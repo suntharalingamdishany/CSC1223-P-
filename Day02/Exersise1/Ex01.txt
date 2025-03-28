@@ -138,3 +138,6 @@ MariaDB [uov]> select * from student;
 6 rows in set (0.001 sec)
 
 MariaDB [uov]>
+
+
+conclusion: I have learnt about how to use primary key,how to delete table values,how to delete table ,how to delete database and how to input the values another method
