@@ -1,0 +1,265 @@
+
+Setting environment for using XAMPP for Windows.
+Disany@DESKTOP-GSBTFN8 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| uov                |
++--------------------+
+6 rows in set (0.095 sec)
+
+MariaDB [(none)]> use uov;
+Database changed
+MariaDB [uov]> show tabels;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tabels' at line 1
+MariaDB [uov]> show tables;
++---------------+
+| Tables_in_uov |
++---------------+
+| employee      |
+| physicians    |
+| student       |
+| students      |
++---------------+
+4 rows in set (0.002 sec)
+
+MariaDB [uov]> select * from employee;
+Empty set (0.052 sec)
+
+MariaDB [uov]> select * from students;
++-------------+-----------+--------+------------+------------+
+| students_id | name      | course | DOB        | city       |
++-------------+-----------+--------+------------+------------+
+| 2022/ASP/45 | Dishany   | AMC    | 2003-12-15 | Batticaloa |
+| 2022/ASP/48 | Jihasika  | AMC    | 2002-02-10 | Batticaloa |
+| 2022/ASP/52 | Sineka    | AMC    | 2003-05-24 | Batticaloa |
+| 2022/ASP/53 | Avithka   | AMC    | 2002-11-20 | Batticaloa |
+| 2022/ASP/46 | Kishanthy | AMC    | 2003-08-12 | Batticaloa |
++-------------+-----------+--------+------------+------------+
+5 rows in set (0.018 sec)
+
+MariaDB [uov]> select * from student;
++------------+---------+------+-------+--------------+
+| student_id | Name    | Age  | Grade | City         |
++------------+---------+------+-------+--------------+
+    |      1 | Alice   |   20 | A     | New York
+|          2 | Bob     |   22 | B     | B            |
+    |      3 | Charlie |   21 | A     | New York
+|          4 | David   |   23 | C     | Charlie      |
+     |     5 | Emma    |   22 | B     | Chicago
+ |         6 | Frank   |   20 | A     | Los Angeles
++------------+---------+------+-------+--------------+
+6 rows in set (0.016 sec)
+
+MariaDB [uov]> drop table student;
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [uov]> create table workers(
+    -> workers_id int primary key,
+    -> name varchar(30),
+    -> age int,
+    -> grade char(1),
+    -> city varchar(30));
+Query OK, 0 rows affected (0.025 sec)
+
+MariaDB [uov]> desc workers;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| workers_id | int(11)     | NO   | PRI | NULL    |       |
+| name       | varchar(30) | YES  |     | NULL    |       |
+| age        | int(11)     | YES  |     | NULL    |       |
+| grade      | char(1)     | YES  |     | NULL    |       |
+| city       | varchar(30) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.046 sec)
+
+MariaDB [uov]> insert into workers values(
+    -> '1','Alice',20,'A','New york'),
+    -> ('2','Bob',22,'B','Chicago'),
+    -> ('3','Charlie',21,'A','New york'),
+    -> ('4','David',23,'C','Boston'),
+    -> ('5','Emma',22,'B','Chicago'),
+    -> ('6','Frank',20,'A','Los angeles');
+Query OK, 6 rows affected (0.024 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+MariaDB [uov]> select * from workers;
++------------+---------+------+-------+-------------+
+| workers_id | name    | age  | grade | city        |
++------------+---------+------+-------+-------------+
+|          1 | Alice   |   20 | A     | New york    |
+|          2 | Bob     |   22 | B     | Chicago     |
+|          3 | Charlie |   21 | A     | New york    |
+|          4 | David   |   23 | C     | Boston      |
+|          5 | Emma    |   22 | B     | Chicago     |
+|          6 | Frank   |   20 | A     | Los angeles |
++------------+---------+------+-------+-------------+
+6 rows in set (0.001 sec)
+
+MariaDB [uov]> select * from workers where name='Alice';
++------------+-------+------+-------+----------+
+| workers_id | name  | age  | grade | city     |
++------------+-------+------+-------+----------+
+|          1 | Alice |   20 | A     | New york |
++------------+-------+------+-------+----------+
+1 row in set (0.002 sec)
+
+MariaDB [uov]> select * from workers where name like 'A%';
++------------+-------+------+-------+----------+
+| workers_id | name  | age  | grade | city     |
++------------+-------+------+-------+----------+
+|          1 | Alice |   20 | A     | New york |
++------------+-------+------+-------+----------+
+1 row in set (0.000 sec)
+
+MariaDB [uov]> select * from workers where name like '%e';
++------------+---------+------+-------+----------+
+| workers_id | name    | age  | grade | city     |
++------------+---------+------+-------+----------+
+|          1 | Alice   |   20 | A     | New york |
+|          3 | Charlie |   21 | A     | New york |
++------------+---------+------+-------+----------+
+2 rows in set (0.001 sec)
+
+MariaDB [uov]> select * from workers where name like '%li%';
++------------+---------+------+-------+----------+
+| workers_id | name    | age  | grade | city     |
++------------+---------+------+-------+----------+
+|          1 | Alice   |   20 | A     | New york |
+|          3 | Charlie |   21 | A     | New york |
++------------+---------+------+-------+----------+
+2 rows in set (0.001 sec)
+
+MariaDB [uov]> select * from workers where city like'%new%';
++------------+---------+------+-------+----------+
+| workers_id | name    | age  | grade | city     |
++------------+---------+------+-------+----------+
+|          1 | Alice   |   20 | A     | New york |
+|          3 | Charlie |   21 | A     | New york |
++------------+---------+------+-------+----------+
+2 rows in set (0.001 sec)
+
+MariaDB [uov]> select * from workers where  where city='new york' or grade='A';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where city='new york' or grade='A'' at line 1
+MariaDB [uov]> select * from workers  where city='new york' or grade='A';
++------------+---------+------+-------+-------------+
+| workers_id | name    | age  | grade | city        |
++------------+---------+------+-------+-------------+
+|          1 | Alice   |   20 | A     | New york    |
+|          3 | Charlie |   21 | A     | New york    |
+|          6 | Frank   |   20 | A     | Los angeles |
++------------+---------+------+-------+-------------+
+3 rows in set (0.001 sec)
+
+MariaDB [uov]> select * from workers where city!='new york' and city!='Los angeles';
++------------+-------+------+-------+---------+
+| workers_id | name  | age  | grade | city    |
++------------+-------+------+-------+---------+
+|          2 | Bob   |   22 | B     | Chicago |
+|          4 | David |   23 | C     | Boston  |
+|          5 | Emma  |   22 | B     | Chicago |
++------------+-------+------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [uov]> select * from workers limit 3;
++------------+---------+------+-------+----------+
+| workers_id | name    | age  | grade | city     |
++------------+---------+------+-------+----------+
+|          1 | Alice   |   20 | A     | New york |
+|          2 | Bob     |   22 | B     | Chicago  |
+|          3 | Charlie |   21 | A     | New york |
++------------+---------+------+-------+----------+
+3 rows in set (0.001 sec)
+
+MariaDB [uov]> select count(*) from workers;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [uov]> select max(age) from workers;
++----------+
+| max(age) |
++----------+
+|       23 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [uov]> select min(age) from workers;
++----------+
+| min(age) |
++----------+
+|       20 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [uov]> select avg(age) from workers;
++----------+
+| avg(age) |
++----------+
+|  21.3333 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [uov]> select upper(name) from workers;
++-------------+
+| upper(name) |
++-------------+
+| ALICE       |
+| BOB         |
+| CHARLIE     |
+| DAVID       |
+| EMMA        |
+| FRANK       |
++-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [uov]> select lower(name) from workers;
++-------------+
+| lower(name) |
++-------------+
+| alice       |
+| bob         |
+| charlie     |
+| david       |
+| emma        |
+| frank       |
++-------------+
+6 rows in set (0.001 sec)
+
+MariaDB [uov]> select name as workers_name from workers;
++--------------+
+| workers_name |
++--------------+
+| Alice        |
+| Bob          |
+| Charlie      |
+| David        |
+| Emma         |
+| Frank        |
++--------------+
+6 rows in set (0.001 sec)
+
+MariaDB [uov]>
+
+Conclusion: I have learnt about how to select particular column, how to use keywords(where, between,and,or,not) correct places,
+           how to find maximum,minimun,avarage and count. 
