@@ -1,0 +1,416 @@
+
+Setting environment for using XAMPP for Windows.
+user@DESKTOP-VNS1MPB c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database librarysystem;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| librarysystem      |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| uov                |
++--------------------+
+7 rows in set (0.003 sec)
+
+MariaDB [(none)]> use librarysystem;
+Database changed
+MariaDB [librarysystem]> create table author(author_id int primary key,name varchar(30),year int);
+Query OK, 0 rows affected (0.032 sec)
+
+MariaDB [librarysystem]> select * from author;
+Empty set (0.089 sec)
+
+MariaDB [librarysystem]> desc author;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| author_id | int(11)     | NO   | PRI | NULL    |       |
+| name      | varchar(30) | YES  |     | NULL    |       |
+| year      | int(11)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.049 sec)
+
+MariaDB [librarysystem]> insert into author values(
+    -> 1,'J.K.Rowling',1965),
+    -> (2,'Geroge R.R.Martin',1948),
+    -> (3,'Agatha chritie',1890),
+    -> (4,'Stephen king',1947),
+    -> (5,'Haruki murakami,1949);
+    '> ;
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 6
+MariaDB [librarysystem]> insert into author values(
+    -> 1,'J.K.Rowling',1965),
+    -> (2,'Geroge R.R.Martin',1948),
+    -> (3,'Agatha chritie',1890),
+    -> (4,'Stephen king',1947),
+    -> (5,'Haruki murakami',1949);
+Query OK, 5 rows affected (0.024 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from author;
++-----------+-------------------+------+
+| author_id | name              | year |
++-----------+-------------------+------+
+|         1 | J.K.Rowling       | 1965 |
+|         2 | Geroge R.R.Martin | 1948 |
+|         3 | Agatha chritie    | 1890 |
+|         4 | Stephen king      | 1947 |
+|         5 | Haruki murakami   | 1949 |
++-----------+-------------------+------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> Alter table author
+    -> Add country varchar(30);
+Query OK, 0 rows affected (0.030 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> desc author;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| author_id | int(11)     | NO   | PRI | NULL    |       |
+| name      | varchar(30) | YES  |     | NULL    |       |
+| year      | int(11)     | YES  |     | NULL    |       |
+| country   | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.037 sec)
+
+MariaDB [librarysystem]> select * from author;
++-----------+-------------------+------+---------+
+| author_id | name              | year | country |
++-----------+-------------------+------+---------+
+|         1 | J.K.Rowling       | 1965 | NULL    |
+|         2 | Geroge R.R.Martin | 1948 | NULL    |
+|         3 | Agatha chritie    | 1890 | NULL    |
+|         4 | Stephen king      | 1947 | NULL    |
+|         5 | Haruki murakami   | 1949 | NULL    |
++-----------+-------------------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> Alter table author
+    -> add age int
+    -> after name;
+Query OK, 0 rows affected (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> desc author;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| author_id | int(11)     | NO   | PRI | NULL    |       |
+| name      | varchar(30) | YES  |     | NULL    |       |
+| age       | int(11)     | YES  |     | NULL    |       |
+| year      | int(11)     | YES  |     | NULL    |       |
+| country   | varchar(30) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.054 sec)
+
+MariaDB [librarysystem]> select * from author;
++-----------+-------------------+------+------+---------+
+| author_id | name              | age  | year | country |
++-----------+-------------------+------+------+---------+
+|         1 | J.K.Rowling       | NULL | 1965 | NULL    |
+|         2 | Geroge R.R.Martin | NULL | 1948 | NULL    |
+|         3 | Agatha chritie    | NULL | 1890 | NULL    |
+|         4 | Stephen king      | NULL | 1947 | NULL    |
+|         5 | Haruki murakami   | NULL | 1949 | NULL    |
++-----------+-------------------+------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table author
+    -> add FIRSTNAME varchar(50)
+    -> first;
+Query OK, 0 rows affected (0.011 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from author;
++-----------+-----------+-------------------+------+------+---------+
+| FIRSTNAME | author_id | name              | age  | year | country |
++-----------+-----------+-------------------+------+------+---------+
+| NULL      |         1 | J.K.Rowling       | NULL | 1965 | NULL    |
+| NULL      |         2 | Geroge R.R.Martin | NULL | 1948 | NULL    |
+| NULL      |         3 | Agatha chritie    | NULL | 1890 | NULL    |
+| NULL      |         4 | Stephen king      | NULL | 1947 | NULL    |
+| NULL      |         5 | Haruki murakami   | NULL | 1949 | NULL    |
++-----------+-----------+-------------------+------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> update author
+    -> set country='UK'
+    -> where autorID=1;
+ERROR 1054 (42S22): Unknown column 'autorID' in 'where clause'
+MariaDB [librarysystem]> update author
+    -> set country='UK'
+    -> where author_id=1;
+Query OK, 1 row affected (0.024 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [librarysystem]> select * from author;
++-----------+-----------+-------------------+------+------+---------+
+| FIRSTNAME | author_id | name              | age  | year | country |
++-----------+-----------+-------------------+------+------+---------+
+| NULL      |         1 | J.K.Rowling       | NULL | 1965 | UK      |
+| NULL      |         2 | Geroge R.R.Martin | NULL | 1948 | NULL    |
+| NULL      |         3 | Agatha chritie    | NULL | 1890 | NULL    |
+| NULL      |         4 | Stephen king      | NULL | 1947 | NULL    |
+| NULL      |         5 | Haruki murakami   | NULL | 1949 | NULL    |
++-----------+-----------+-------------------+------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table author
+    -> drop column age;
+Query OK, 0 rows affected (0.030 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from author;
++-----------+-----------+-------------------+------+---------+
+| FIRSTNAME | author_id | name              | year | country |
++-----------+-----------+-------------------+------+---------+
+| NULL      |         1 | J.K.Rowling       | 1965 | UK      |
+| NULL      |         2 | Geroge R.R.Martin | 1948 | NULL    |
+| NULL      |         3 | Agatha chritie    | 1890 | NULL    |
+| NULL      |         4 | Stephen king      | 1947 | NULL    |
+| NULL      |         5 | Haruki murakami   | 1949 | NULL    |
++-----------+-----------+-------------------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table author
+    -> drop column country;
+Query OK, 0 rows affected (0.032 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from author;
++-----------+-----------+-------------------+------+
+| FIRSTNAME | author_id | name              | year |
++-----------+-----------+-------------------+------+
+| NULL      |         1 | J.K.Rowling       | 1965 |
+| NULL      |         2 | Geroge R.R.Martin | 1948 |
+| NULL      |         3 | Agatha chritie    | 1890 |
+| NULL      |         4 | Stephen king      | 1947 |
+| NULL      |         5 | Haruki murakami   | 1949 |
++-----------+-----------+-------------------+------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]>  alter table author
+    -> add age int after name,
+    -> add country varchar(50) after year;
+Query OK, 0 rows affected (0.032 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from author;
++-----------+-----------+-------------------+------+------+---------+
+| FIRSTNAME | author_id | name              | age  | year | country |
++-----------+-----------+-------------------+------+------+---------+
+| NULL      |         1 | J.K.Rowling       | NULL | 1965 | NULL    |
+| NULL      |         2 | Geroge R.R.Martin | NULL | 1948 | NULL    |
+| NULL      |         3 | Agatha chritie    | NULL | 1890 | NULL    |
+| NULL      |         4 | Stephen king      | NULL | 1947 | NULL    |
+| NULL      |         5 | Haruki murakami   | NULL | 1949 | NULL    |
++-----------+-----------+-------------------+------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table author
+    -> modify year int(4);
+Query OK, 0 rows affected (0.029 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> desc author;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FIRSTNAME | varchar(50) | YES  |     | NULL    |       |
+| author_id | int(11)     | NO   | PRI | NULL    |       |
+| name      | varchar(30) | YES  |     | NULL    |       |
+| age       | int(11)     | YES  |     | NULL    |       |
+| year      | int(4)      | YES  |     | NULL    |       |
+| country   | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.056 sec)
+
+MariaDB [librarysystem]> alter table author
+    -> change column age Autor_Age int;
+Query OK, 0 rows affected (0.029 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from author;
++-----------+-----------+-------------------+-----------+------+---------+
+| FIRSTNAME | author_id | name              | Autor_Age | year | country |
++-----------+-----------+-------------------+-----------+------+---------+
+| NULL      |         1 | J.K.Rowling       |      NULL | 1965 | NULL    |
+| NULL      |         2 | Geroge R.R.Martin |      NULL | 1948 | NULL    |
+| NULL      |         3 | Agatha chritie    |      NULL | 1890 | NULL    |
+| NULL      |         4 | Stephen king      |      NULL | 1947 | NULL    |
+| NULL      |         5 | Haruki murakami   |      NULL | 1949 | NULL    |
++-----------+-----------+-------------------+-----------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> create table employee(emp_id int(3) not null,first_name varchar(50),last_name varchar(50),hire_date date);
+Query OK, 0 rows affected (0.036 sec)
+
+MariaDB [librarysystem]> desc employee;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| emp_id     | int(3)      | NO   |     | NULL    |       |
+| first_name | varchar(50) | YES  |     | NULL    |       |
+| last_name  | varchar(50) | YES  |     | NULL    |       |
+| hire_date  | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.051 sec)
+
+MariaDB [librarysystem]> insert into employees(emp_id,first_name,last_name,hire_date)values
+    ->  (1,'Alice','johnson','2021-01-15'),
+    -> (2,'Bob','Smith','2020-07-30'),
+    -> (3,'Carla','Garcia','2022-03-10'),
+    -> (4,'David','Lee','2019-11-05');
+ERROR 1146 (42S02): Table 'librarysystem.employees' doesn't exist
+MariaDB [librarysystem]> insert into employee(emp_id,first_name,last_name,hire_date)values
+    ->  (1,'Alice','johnson','2021-01-15'),
+    -> (2,'Bob','Smith','2020-07-30'),
+    -> (3,'Carla','Garcia','2022-03-10'),
+    -> (4,'David','Lee','2019-11-05');
+Query OK, 4 rows affected (0.024 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from employee;
++--------+------------+-----------+------------+
+| emp_id | first_name | last_name | hire_date  |
++--------+------------+-----------+------------+
+|      1 | Alice      | johnson   | 2021-01-15 |
+|      2 | Bob        | Smith     | 2020-07-30 |
+|      3 | Carla      | Garcia    | 2022-03-10 |
+|      4 | David      | Lee       | 2019-11-05 |
++--------+------------+-----------+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table employee
+    ->  add primary key (emp_id);
+Query OK, 0 rows affected (0.085 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> desc employee;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| emp_id     | int(3)      | NO   | PRI | NULL    |       |
+| first_name | varchar(50) | YES  |     | NULL    |       |
+| last_name  | varchar(50) | YES  |     | NULL    |       |
+| hire_date  | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.054 sec)
+
+MariaDB [librarysystem]>  alter table employee
+    ->  add department varchar(30)
+    -> after last_name;
+Query OK, 0 rows affected (0.010 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from employee;
++--------+------------+-----------+------------+------------+
+| emp_id | first_name | last_name | department | hire_date  |
++--------+------------+-----------+------------+------------+
+|      1 | Alice      | johnson   | NULL       | 2021-01-15 |
+|      2 | Bob        | Smith     | NULL       | 2020-07-30 |
+|      3 | Carla      | Garcia    | NULL       | 2022-03-10 |
+|      4 | David      | Lee       | NULL       | 2019-11-05 |
++--------+------------+-----------+------------+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [librarysystem]>  alter table employee
+    -> add department varchar(30) not null default'general'
+    -> after last_name;
+ERROR 1060 (42S21): Duplicate column name 'department'
+MariaDB [librarysystem]> alter table employee
+    ->  drop column department;
+Query OK, 0 rows affected (0.032 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]>  alter table employee
+    -> add department varchar(30) not null default'general'
+    -> after last_name;
+Query OK, 0 rows affected (0.029 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from employee;
++--------+------------+-----------+------------+------------+
+| emp_id | first_name | last_name | department | hire_date  |
++--------+------------+-----------+------------+------------+
+|      1 | Alice      | johnson   | general    | 2021-01-15 |
+|      2 | Bob        | Smith     | general    | 2020-07-30 |
+|      3 | Carla      | Garcia    | general    | 2022-03-10 |
+|      4 | David      | Lee       | general    | 2019-11-05 |
++--------+------------+-----------+------------+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table employee
+    -> change column hire_date employment_date date;
+Query OK, 0 rows affected (0.009 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from employee;
++--------+------------+-----------+------------+-----------------+
+| emp_id | first_name | last_name | department | employment_date |
++--------+------------+-----------+------------+-----------------+
+|      1 | Alice      | johnson   | general    | 2021-01-15      |
+|      2 | Bob        | Smith     | general    | 2020-07-30      |
+|      3 | Carla      | Garcia    | general    | 2022-03-10      |
+|      4 | David      | Lee       | general    | 2019-11-05      |
++--------+------------+-----------+------------+-----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table employee
+    -> add salary int
+    -> after employment_date;
+Query OK, 0 rows affected (0.030 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> select * from employee;
++--------+------------+-----------+------------+-----------------+--------+
+| emp_id | first_name | last_name | department | employment_date | salary |
++--------+------------+-----------+------------+-----------------+--------+
+|      1 | Alice      | johnson   | general    | 2021-01-15      |   NULL |
+|      2 | Bob        | Smith     | general    | 2020-07-30      |   NULL |
+|      3 | Carla      | Garcia    | general    | 2022-03-10      |   NULL |
+|      4 | David      | Lee       | general    | 2019-11-05      |   NULL |
++--------+------------+-----------+------------+-----------------+--------+
+4 rows in set (0.001 sec)
+
+MariaDB [librarysystem]> alter table employee
+    ->  modify salary decimal(12,2);
+Query OK, 4 rows affected (0.075 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [librarysystem]> desc employee;
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| emp_id          | int(3)        | NO   | PRI | NULL    |       |
+| first_name      | varchar(50)   | YES  |     | NULL    |       |
+| last_name       | varchar(50)   | YES  |     | NULL    |       |
+| department      | varchar(30)   | NO   |     | general |       |
+| employment_date | date          | YES  |     | NULL    |       |
+| salary          | decimal(12,2) | YES  |     | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+6 rows in set (0.056 sec)
+
+MariaDB [librarysystem]>
+
+
+conclution: I learnt how to add the column,add the primary key,change the column name.
